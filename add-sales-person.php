@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<!--	Author: Miles Hollifield
-		Date:	4/6/2020
-		File:	add-sale-person.php
-		Purpose:MySQL Exercise
--->
-
-<html>
-<head>
-	<title>MySQL Query</title>
-	<link rel ="stylesheet" type="text/css" href="sample.css">
-</head>
-
-<body>
-
 <?php
-include_once('database/connect.php');
-$connect=mysqli_connect(SERVER, USER, PW, DB);
+$page_title = 'Raises';
+include_once("initialize.php");
 
-if( !$connect) 
-{
-	die("ERROR: Cannot connect to database $db on server $server 
-	using user name $user (".mysqli_connect_errno().
-	", ".mysqli_connect_error().")");
-}
+check_db_connection($connect);
+
 $empID = $_POST['empID'];
 $firstName = $_POST['firstName'];
 $lastName = $_POST['lastName'];
@@ -31,26 +12,18 @@ $userQuery = "INSERT INTO personnel VALUES ('$empID', '$firstName', '$lastName',
 
 $result = mysqli_query($connect, $userQuery);
 
-if (!$result) 
-{
-	die("Could not successfully run query ($userQuery) from $db: " .	
-		mysqli_error($connect) );
-}
-else
-{
-	print("	<h1>ADD A NEW PERSONNEL RECORD</h1>");
-	print ("<p>The following record was added to the personnel table:</p>");
-	print("<table border='0'>
-			<tr><td>EMPLOYEE ID</td><td>$empID</td></tr>
-			<tr><td>FIRST NAME</td><td>$firstName</td></tr>
-			<tr><td>LAST NAME</td><td>$lastName</td></tr>		
-			<tr><td>JOB TITLE</td><td>sales</td></tr>
-			<tr><td>HOURLY WAGE</td><td>8.25</td></tr>
-			</table>");
-}
+check_that_query_runs($result);
 
-mysqli_close($connect);   // close the connection
- 
+echo("	<h1>ADD A NEW PERSONNEL RECORD</h1>");
+echo("<p>The following record was added to the personnel table:</p>");
+echo("<table border='0'>
+		<tr><td>EMPLOYEE ID</td><td>$empID</td></tr>
+		<tr><td>FIRST NAME</td><td>$firstName</td></tr>
+		<tr><td>LAST NAME</td><td>$lastName</td></tr>		
+		<tr><td>JOB TITLE</td><td>sales</td></tr>
+		<tr><td>HOURLY WAGE</td><td>8.25</td></tr>
+		</table>");
+
+mysqli_close($connect);
+include_once("includes/footer.php");
 ?>
-</body>
-</html>

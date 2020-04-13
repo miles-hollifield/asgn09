@@ -11,7 +11,7 @@ $result = mysqli_query($connect, $userQuery);
 check_that_query_runs($result);
 
 if (mysqli_num_rows($result) == 0) {
-	print("No records found with query $userQuery");
+	echo("No records found with query $userQuery");
 }
 else { 
   
