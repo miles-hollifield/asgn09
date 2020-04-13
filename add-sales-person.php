@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Raises';
+$page_title = 'Add Sales Person';
 include_once("initialize.php");
 
 check_db_connection($connect);
